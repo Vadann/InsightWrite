@@ -1,0 +1,231 @@
+/** Mediations page css styles  ***/
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 0;
+}
+
+.InsightWrite {
+  font-size: 2em;
+  color: #2a2a28;
+  user-select: none;
+  font-weight: bold;
+}
+
+ion-icon {
+  font-size: 50px;
+}
+/** nav bar ***/
+.navigation a {
+  position: static;
+  font-size: 1.1em;
+  color: #2a2a28;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 40px;
+}
+
+.footer-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-flex div {
+  flex: 1;
+}
+
+.group-name {
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.gradient-background {
+  background: linear-gradient(300deg, #2b4f60, #bdc7c9, #ead3cb, #845460);
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.icon-square {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+}
+
+.profile-img {
+  height: 100px;
+}
+
+.footer-flex i {
+  margin-right: 10px;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.features p {
+  font-size: 1.25rem;
+  align-items: center;
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #2b4f60, #bdc7c9, #ead3cb, #845460);
+  background-size: 300% 300%;
+  animation: gradient-animation 18s ease infinite;
+}
+
+.feature-icon i {
+  color: white; /* Set icon color to white */
+}
+
+.feature-icon:hover {
+  background-position: 100% 0; /* Adjust gradient position on hover */
+}
+
+.text-center {
+  text-align: center;
+}
+
+.star {
+  font-size: 30px !important;
+  color: black;
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #bbb;
+  color: white;
+}
+
+/* Style the back side */
+.flip-card-back {
+  height: 450px; /* Adjust this value as needed */
+  background-color: #2b4f60;
+  color: white;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px; /* Adjust as needed */
+}
+
+.reading-header {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.card-title {
+  margin-bottom: 10px;
+  color: black;
+}
+
+.card-text {
+  margin-bottom: 5px;
+  color: black;
+}
+
+.card-review {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: black;
+}
+
+.btn {
+  margin-top: 10px;
+  background-color: #2b4f60;
+  color: white;
+}
+
+.btn:hover {
+  background-color: #55879e; /* Replace with your desired hover color */
+  color: white; /* Replace with your desired hover text color */
+}
+
+.footer-buffer {
+  margin-top: 325px;
+}
+
+.grey-background {
+  background-color: #f5f5f5f9; /* Light gray */
+}
+
+/* Journaling Tips Styles */
+.journaling-tip {
+  margin-bottom: 30px;
+}
+
+.tip-title {
+  font-size: 24px;
+  color: #2b4f60; /* Dark blue color */
+  margin-bottom: 10px;
+}
+
+.tip-description {
+  font-size: 18px;
+  color: #2a2a28; /* Dark grey color */
+  line-height: 1.6;
+}

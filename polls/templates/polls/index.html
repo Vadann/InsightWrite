@@ -1,0 +1,21 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'polls/style.css' %}" />
+
+{% if latest_question_list %}
+<ul>
+  {% for question in latest_question_list %}
+  <p>HI THERE</p>
+  <li>
+    <a href="{% url 'polls:detail' question.id %}"
+      >{{ question.question_text }}</a
+    >
+  </li>
+  {% endfor %}
+</ul>
+
+{% else %}
+<p>HI THERE</p>
+<p>this is the webpage</p>
+
+{% endif %}

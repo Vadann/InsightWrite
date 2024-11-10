@@ -1,0 +1,2205 @@
+   /**this is css style for the journal entries app**/
+
+
+   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+   html {
+    scroll-behavior: smooth;
+}
+
+   * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+       font-family: 'Poppins', sans-serif;
+   }
+
+
+
+
+   body {
+       min-height: 100vh;
+       background: url('/static/journals/img/photo5.jpg') no-repeat;
+       background-size: cover;
+       background-position: center;
+   }
+
+
+
+
+   /** --------------------------------------------------------------------------------------------------  **/
+
+
+
+
+   /**this is css style for the sidebar**/
+   .sidebar {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 80px;
+       height: 100%;
+       background: transparent;
+       backdrop-filter: blur(40px);
+       border-right: 2px solid rgba(255, 255, 255, .2);
+       box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+       padding: 6px 14px;
+       transition: .5s;
+   }
+
+
+
+
+
+
+
+
+   .sidebar.active {
+       width: 260px;
+   }
+
+
+
+
+
+
+
+
+   .sidebar .logo-menu {
+       display: flex;
+       align-items: center;
+       width: 100%;
+       height: 70px;
+   }
+
+
+
+
+
+
+
+
+   .sidebar .logo-menu .logo {
+       font-size: 25px;
+       color: #253333;
+       pointer-events: none;
+       opacity: 0;
+       transition: .3s;
+   }
+
+
+
+
+
+
+
+
+   .sidebar.active .logo-menu .logo {
+       opacity: 1;
+       transition-delay: .2s;
+   }
+
+
+
+
+
+
+
+
+   .sidebar .logo-menu .toggle-btn {
+       position: absolute;
+       left: 50%;
+       transform: translateX(-50%);
+       width: 40px;
+       height: 40px;
+       font-size: 22px;
+       color: #253333;
+       text-align: center;
+       line-height: 40px;
+       cursor: pointer;
+       transition: .5s;
+   }
+
+
+
+
+
+
+
+
+   .sidebar.active .logo-menu .toggle-btn {
+       left: 90%;
+   }
+
+
+
+
+
+
+
+
+   .sidebar .list {
+       margin-top: 10px;
+   }
+
+
+
+
+
+
+
+
+   .list .list-item {
+       list-style: none;
+       width: 100%;
+       height: 50px;
+       margin: 5px 0;
+       line-height: 50px;
+   }
+
+
+
+
+
+
+
+
+   .list .list-item a {
+       display: flex;
+       align-items: center;
+       font-size: 18px;
+       color: #253333;
+       text-decoration: none;
+       border-radius: 6px;
+       white-space: nowrap;
+       transition: .5s;
+   }
+
+
+
+
+
+
+
+
+   .list .list-item.active a,
+   .list .list-item a:hover {
+       background: rgba(255, 255, 255, .2);
+   }
+
+
+
+
+
+
+
+
+   .list .list-item a i {
+       min-width: 50px;
+       height: 50px;
+       text-align: center;
+       line-height: 50px;
+   }
+
+
+
+
+
+
+
+
+   .sidebar .link-name {
+       opacity: 0;
+       pointer-events: none;
+       transition: opacity .3s;
+   }
+
+
+
+
+
+   .sidebar.active .link-name {
+       opacity: 1;
+       pointer-events: auto;
+       transition-delay: calc(.1s * var(--i));
+   }
+
+
+
+
+   /** --------------------------------------------------------------------------------------------------  **/
+
+
+
+
+   /**Time bar style**/
+   #time-bar {
+       position: absolute;
+       top: 0;
+       right: 0;
+       padding: 5px 10px;
+       background: #54696E;
+       /* Change this as per your color theme */
+       color: #F1F7F3;
+       /* For text color */
+       border-radius: 0 0 0 10px;
+       /* Rounded bottom-left corner */
+       font-size: 0.85rem;
+   }
+
+
+
+
+
+
+
+
+   #word-count {
+       position: absolute;
+       top: 0px;
+       /* Adjust as needed */
+       left: 25%;
+       padding: 3px 8px;
+       background: #54696E;
+       color: #F1F7F3;
+       border-radius: 0 0 10px 10px;
+       font-size: 0.85rem;
+       z-index: 5;
+       /* This should be higher than the z-index of other elements */
+   }
+
+
+
+
+   /* Dark mode styles */
+   [data-theme="dark"] {
+       --word-count-time-bar-bg: #181818;
+       /* Choose your desired background color */
+       --word-count-time-bar-color: #D1D1D1;
+       /* Choose your desired text color */
+   }
+
+
+
+
+   [data-theme="dark"] #word-count,
+   [data-theme="dark"] #time-bar {
+       background-color: var(--word-count-time-bar-bg);
+       color: var(--word-count-time-bar-color);
+   }
+
+
+
+
+   /** --------------------------------------------------------------------------------------------------  **/
+
+
+
+
+   /* new entry for txt formatting */
+   #entry {
+       background-color: white;
+       /* Match the background */
+       border: 1px solid #ccc;
+       /* Standard border */
+       padding: 10px;
+       /* Padding similar to textarea */
+       min-height: 150px;
+       /* Minimum height */
+       overflow: auto;
+       /* Allow scrolling */
+       font-family: 'Poppins', sans-serif;
+       /* Match the font style to your other inputs */
+       font-size: 15px;
+       /* Appropriate font size */
+       display: block;
+       /* Ensure it behaves like a block element */
+       width: 100%;
+       /* Take full width */
+       box-sizing: border-box;
+       /* Include padding and border in the width */
+       border-radius: 3px;
+       /* Optional: rounded corners like inputs */
+       color: #555;
+       /* Text color */
+       transition: border-color 0.3s;
+       /* Smooth transition for focus border */
+       margin-bottom: 8px;
+       
+   }
+
+
+   #entry:focus {
+       content: attr(data-placeholder);
+       border: 1px solid #333;
+       border-color: #333;
+       /* Highlight color on focus */
+       outline: none;
+       /* Remove default focus outline */
+
+
+   }
+
+
+   #entry ul {
+       list-style-type: disc;
+       /* standard bullet points */
+       padding-left: 20px;
+       /* ensure bullets are inside the visible area */
+   }
+
+
+   #entry ol {
+       list-style-type: decimal;
+       /* standard numbers */
+       padding-left: 20px;
+       /* ensure numbers are inside the visible area */
+   }
+
+
+   .entry-content ul,
+   .entry-content ol {
+       padding-left: 10px;
+       /* Adjust as needed for alignment */
+       list-style-position: inside;
+       /* Ensure bullets/numbers are visible */
+   }
+
+
+   .entry-content ul {
+       list-style-type: disc;
+       /* Style for unordered list */
+   }
+
+
+   .entry-content ol {
+       list-style-type: decimal;
+       /* Style for ordered list */
+   }
+
+
+   .checklist-item {
+       list-style-type: none;
+       /* Removes the default list bullet */
+       position: relative;
+       padding-left: 25px;
+       /* Give some space for the custom checkbox */
+   }
+
+
+   .checklist-item:before {
+       content: '☑';
+       margin-right: 5px;
+       position: absolute;
+       left: 0;
+       top: 0;
+       color: black;
+       /* Adjust color as needed */
+       font-size: 18px;
+       /* Adjust size as needed */
+   }
+
+
+   /**css style for journal entry**/
+   body {
+       font-family: sans-serif;
+       margin: 0;
+       padding: 0;
+   }
+
+
+
+
+
+
+
+
+   .container {
+       width: 800px;
+       margin: 50px auto;
+       border: 1px solid #ddd;
+       padding: 20px;
+       border-radius: 5px;
+       backdrop-filter: blur(10px);
+       box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+   }
+
+
+
+
+
+
+
+
+   h1 {
+       text-align: center;
+   }
+
+
+
+
+
+
+
+
+   /** Clear button **/
+   .clear-btn {
+       position: absolute;
+       top: 15px;
+       right: 20px;
+       transform: translate(50%, -50%);
+       background-color: transparent;
+       /* Make the button background transparent */
+       border: none;
+       /* No border */
+       cursor: pointer;
+       transition: background-color 0.3s ease;
+       border-radius: 4px;
+       /* Slightly rounded corners for aesthetics */
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       width: 40px;
+       /* Fixed width */
+       height: 40px;
+       /* Fixed height */
+       color: #4f6161;
+   }
+
+
+
+
+
+
+
+
+   .clear-btn i {
+       font-size: 1.5rem;
+       /* Icon size */
+       transition: opacity 0.3s ease;
+       /* Animate the opacity */
+       opacity: 1;
+       /* Start fully visible */
+   }
+
+
+
+
+
+
+
+
+   .clear-btn .btn-text {
+       position: absolute;
+       transition: opacity 0.3s ease;
+       /* Animate the opacity */
+       opacity: 0;
+       /* Start fully transparent */
+       white-space: nowrap;
+   }
+
+
+
+
+
+
+
+
+   .clear-btn:hover i {
+       opacity: 0;
+       /* Fade out the icon */
+   }
+
+
+
+
+
+
+
+
+   .clear-btn:hover .btn-text {
+       opacity: 1;
+       /* Fade in the text */
+   }
+
+
+
+
+
+
+
+
+   /* entry field style */
+   .entry-form {
+       display: flex;
+       flex-direction: column;
+       margin-bottom: 20px;
+   }
+
+
+
+
+
+
+
+
+   .entry-form label {
+       margin-bottom: 5px;
+   }
+
+
+
+
+
+
+
+
+   .entry-form input,
+   .entry-form textarea {
+       padding: 10px;
+       border: 1px solid #ddd;
+       border-radius: 3px;
+       margin-bottom: 10px;
+       display:block;
+       width:100%;
+   }
+
+
+
+
+
+
+
+
+   .entry-form textarea {
+       height: 200px;
+   }
+
+
+
+
+
+
+
+
+   #submit-button {
+       background-color: #4f6161;
+       color: white;
+       padding: 10px 20px;
+       border: none;
+       border-radius: 3px;
+       cursor: pointer;
+       transition: background-color 0.3s, color 0.3s;
+       /* Smooth transition for hover effects */
+       box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+   }
+
+
+   /* Hover and focus styles */
+   #submit-button:hover,
+   #submit-button:focus {
+       background-color: #7d9491;
+       /* Lighter color on hover/focus */
+       color: #eef5ef;
+       /* Text color on hover/focus */
+       /* Add any additional styles for hover state */
+   }
+
+
+
+
+
+
+
+
+   /* Active style when the button is clicked */
+   #submit-button:active {
+       background-color: #687c7d;
+       /* Even darker color on click */
+       /* Add any additional styles for active state */
+   }
+
+
+
+
+
+
+
+
+   .entries {
+       display: flex;
+       flex-direction: column-reverse;
+       background-color: #eef5ef;
+       /* Add background color */
+       padding: 20px;
+       /* Add padding for spacing */
+       border-radius: 5px;
+       /* Add border radius for styling */
+       border: 1px solid #fff;
+       /* Add border for separation */
+   }
+
+
+
+
+
+
+
+
+   .entry {
+       border: 1px solid #ddd;
+       padding: 10px;
+       margin-bottom: 10px;
+       border-radius: 3px;
+       position: relative;
+       /* Ensure relative positioning for absolute positioning of delete button */
+       display: flex;
+       align-items: flex-start;
+       /* Align items to the start of the flex container */
+       justify-content: space-between;
+       /* Space out the children */
+       flex-wrap: wrap;
+       /* Allow items to wrap as needed */
+       gap: 1px;
+       /* Optional: add some space between your items */
+
+
+
+
+       position: relative;
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+   /* Ensure the entry content has padding to not overlap with delete button */
+   .entry-content {
+       padding-right: 100px;
+       /* Add more padding to ensure text doesn't go under the delete button */
+       flex: 1;
+       /* This allows the content to grow and take available space */
+       min-width: 0;
+       /* This prevents the flex item from overflowing its container */
+   }
+
+
+
+
+
+
+
+
+   /* Style for the image preview */
+   .image-preview {
+       width: 130px;
+       /* Reduced width to give more space to delete button */
+       height: 130px;
+       /* Reduced height to match the width */
+       background-size: cover;
+       background-position: center;
+       border-radius: 5px;
+       margin-top: 23px;
+       margin-bottom: 7px;
+       margin-right: 5px;
+       /* Add margin to the right side for space between image and delete button */
+       box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+       /* Optional: added shadow for depth */
+
+
+
+
+       flex: none;
+       /* This prevents the image from growing and only taking up the space of its content */
+       display: none;
+
+
+
+
+   }
+
+
+
+
+   /* You might want to adjust the delete and edit button's positions if necessary */
+   .edit-btn,
+   .delete-btn {
+       position: absolute;
+       top: 10px;
+       /* Adjust the positioning according to your layout needs */
+   }
+
+
+
+
+
+
+
+
+   .horizontal-navbar {
+       margin-bottom: 5px;
+       /* Remove space below the navbar */
+   }
+
+
+
+
+
+
+
+
+   .entry-form {
+       margin-top: 0;
+       /* Remove space above the form */
+   }
+
+
+
+
+
+
+
+
+   /* If the buttons are in a list, remove margin and padding */
+   .horizontal-navbar ul {
+       list-style: none;
+       padding-left: 0;
+       /* Remove padding if it's a list */
+       margin: 0;
+       /* Adjust margin as needed */
+   }
+
+
+
+
+
+
+
+
+   /* Align buttons horizontally and close together */
+   .horizontal-navbar ul li {
+       display: inline-block;
+       margin-right: 5px;
+       /* Adjust space between buttons */
+   }
+
+
+
+
+
+
+
+
+   /* If there is a container around the buttons and the entry field, make it a flex container */
+   .entry-form-wrapper {
+       /* This class name is just an example */
+       display: flex;
+       flex-direction: column;
+       align-items: stretch;
+       /* This will stretch the child elements to fill the width */
+   }
+
+
+
+
+
+
+
+
+   /* Additional style for entry to ensure it contains floated elements */
+   .entry {
+       overflow: hidden;
+       /* This will contain the floated image inside the entry */
+   }
+
+
+
+
+
+
+
+
+   /* Style for edit button */
+   .edit-btn {
+       position: absolute;
+       top: 1px;
+       right: 70px;
+       /* Adjust this value so that it doesn't overlap with the delete button */
+       background: #4f6161;
+       border: none;
+       cursor: pointer;
+       padding: 5px;
+       z-index: 20;
+       color: #FFFFFF;
+       text-decoration:none;
+       border-radius:5px;
+       padding:5px 5px
+   }
+
+
+
+
+   .edit-btn i {
+       font-size: 20px;
+       /* Match the delete button size */
+   }
+
+
+
+
+   .entry:hover .edit-btn {
+       opacity: 1;
+       /* if you want to make the edit button fully visible on entry hover adjust to 0*/
+   }
+
+
+
+
+   .entry .edit-btn {
+       opacity: 1;
+       /* Make the edit button invisible by default */
+       transition: opacity 0.3s;
+       /* Smooth transition for the opacity */
+   }
+
+
+
+
+   /* Adjusting the entry content padding to prevent overlap */
+   .entry-content {
+       padding-right: 80px;
+       /* Increase right padding to make space for buttons */
+   }
+
+
+
+
+   /* Additional hover styles for the edit button */
+   .edit-btn:hover {
+       color: #7d9491;
+       /* Lighter color on hover */
+   }
+
+
+
+
+   /* Style for the delete button hover effect for consistency */
+   .delete-btn:hover {
+       color: #7d9491;
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+   /* Style for delete button */
+   .delete-btn {
+       position: absolute;
+       top: 1px;
+       right: 5px;
+       /* Adjust the right position as needed */
+       z-index: 10;
+       /* Ensures the button is above the image */
+       background: transparent;
+       border: none;
+       cursor: pointer;
+       color: #4f6161;
+       padding: 5px;
+       /* Padding for easier clicking */
+       z-index: 20;
+       /* Match z-index of edit button */
+   }
+
+
+
+
+
+
+
+
+   /* delete size */
+   .delete-btn i {
+       font-size: 20px;
+       /* Adjust the size as needed */
+   }
+
+
+
+
+
+
+
+
+   .entry h2 {
+       margin-top: 0;
+   }
+
+
+
+
+   /* Style for toolbar buttons */
+   .horizontal-navbar ul li button {
+       background: #4f6161;
+       /* Background color */
+       color: white;
+       /* Text/icon color */
+       border: none;
+       border-radius: 5px;
+       /* Rounded corners */
+       padding: 8px;
+       /* Spacing inside the buttons */
+       margin-right: 4px;
+       /* Space between buttons */
+       cursor: pointer;
+       /* Mouse cursor on hover */
+       transition: background-color 0.3s, transform 0.1s;
+       /* Smooth transition for background color and transform */
+   }
+
+
+
+
+
+
+
+
+   /* Hover and focus styles for buttons */
+   .horizontal-navbar ul li button:hover,
+   .horizontal-navbar ul li button:focus {
+       background: #7d9491;
+       /* Lighter color on hover/focus */
+       transform: translateY(-2px);
+       /* Slight raise effect on hover/focus */
+       outline: none;
+       /* Remove focus outline */
+   }
+
+
+
+
+   /* Active style for buttons when they are clicked */
+   .horizontal-navbar ul li button:active {
+       transform: translateY(1px);
+       /* Pushed down effect on click */
+       background: #687c7d;
+       /* Even lighter color on click */
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+   /* Style for the file input label */
+   .file-input-label {
+       position: relative;
+       display: inline-block;
+       cursor: pointer;
+   }
+
+
+
+
+
+
+
+
+   /* Style for the icon inside the label */
+   .file-input-label i {
+       position: absolute;
+       left: 0;
+       top: 50%;
+       transform: translateY(-50%);
+   }
+
+
+
+
+
+
+
+
+   /* Hide the default file input text */
+   .file-input {
+       display: none;
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /** --------------------------------------------------------------------------------------------------  **/
+   /* Calendar css styles in the journal entries */
+   .calendar .header {
+       background-color: transparent;
+       /* Remove or set to transparent */
+       margin-bottom: 5px;
+       /* Adjust margin */
+   }
+
+
+
+
+   .calendar #monthYear {
+       margin: auto;
+       font-size: 1.1em;
+       color: #333;
+   }
+
+
+
+
+   .today {
+       background-color: #b0c0a3;
+       /* Darker color for today */
+       color: #fff;
+       /* White text color */
+   }
+
+
+
+
+
+
+
+
+   .calendar {
+       height: 300px;
+       max-width: 300px;
+       margin: 20px auto;
+       font-family: Arial, sans-serif;
+       border-radius: 10px;
+       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+       padding: 20px;
+       position: absolute;
+       left: 0;
+       top: 0%
+   }
+
+
+
+
+   .days {
+       display: flex;
+   }
+
+
+
+
+
+
+
+
+   .day {
+       flex: 1;
+       text-align: center;
+       font-weight: bold;
+   }
+
+
+
+
+
+
+
+
+   .dates {
+       display: flex;
+       flex-wrap: wrap;
+   }
+
+
+
+
+   .date {
+       flex: 1;
+       text-align: center;
+       padding: 5px;
+       cursor: pointer;
+   }
+
+
+
+
+
+
+
+
+   .date:hover {
+       background-color: #9db6b3;
+   }
+
+
+
+
+   .calendar .active {
+       cursor: move;
+       user-select: none;
+   }
+
+
+
+
+   /* Calendar container */
+   .calendar {
+       max-width: 420px;
+       /* Increased width */
+       margin: 20px auto;
+       /* Added some margin */
+       font-family: Arial, sans-serif;
+       border-radius: 10px;
+       background-color: #eef5ef;
+       /* Light blue background */
+       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+       /* Added shadow for depth */
+       padding: 20px;
+       /* Added padding for spacing */
+       position: absolute;
+       /* Changed to absolute */
+       left: 0;
+       /* Added left position */
+       top: 0;
+       /* Added top position */
+   }
+
+
+
+
+   /* Header */
+   .header {
+       margin-bottom: 5px;
+       /* Adjust margin */
+   }
+
+
+
+
+
+
+
+
+   /* Month/Year display */
+   #monthYear {
+       margin: auto;
+       font-size: 1.1em;
+       /* Increased font size */
+       color: #333;
+       /* Dark text color */
+
+
+
+
+   }
+
+
+
+
+   .navigation {
+       display: flex;
+       align-items: center;
+   }
+
+
+
+
+
+
+
+
+   #nextMonth {
+       width: 30px;
+       height: 25px;
+       align-items: center;
+   }
+
+
+
+
+   #prevMonth {
+       width: 30px;
+       height: 25px;
+       align-items: center;
+   }
+
+
+
+
+   #prevMonth,
+   #nextMonth {
+       background-color: #4f6161;
+       color: #fff;
+       border: none;
+       padding: 5px 9px;
+       /* Adjust padding to make the buttons smaller */
+
+
+
+
+
+
+
+
+       border-radius: 3px;
+       /* Adjust border radius if needed */
+       cursor: pointer;
+       transition: background-color 0.3s ease;
+       margin: 8px;
+       /* Add margin for spacing between buttons */
+   }
+
+
+
+
+   #prevMonth:hover,
+   #nextMonth:hover {
+       background-color: #7d9491;
+   }
+
+
+
+
+   /* Days of the week */
+   .days {
+       /*display: flex;*/
+       display: none;
+
+
+
+
+   }
+
+
+
+
+   .day {
+       flex: 1;
+       text-align: center;
+       font-weight: bold;
+       color: #666;
+       font-size: x-small;
+       /* Dark gray text */
+   }
+
+
+
+
+
+
+
+
+   /* Dates container */
+   .dates {
+       display: grid;
+       grid-template-columns: repeat(5, 1fr);
+       /* Adjust the number of columns */
+       gap: 5px;
+       /* Adjust gap */
+   }
+
+
+
+
+   /* Individual dates */
+   .date {
+       text-align: center;
+       padding: 5px;
+       font-size: 12px;
+       /* Adjust font size */
+   }
+
+
+
+
+   .date:hover {
+       background-color: #9db6b3;
+       /* Light blue on hover */
+   }
+
+
+
+
+   /** --------------------------------------------------------------------------------------------------  **/
+   /* daily popup style */
+   .popup-container {
+       display: none;
+       /* Hide by default */
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       background-color: rgba(0, 0, 0, 0.5);
+       /* Semi-transparent background */
+       justify-content: center;
+       align-items: center;
+       z-index: 10;
+       /* High z-index to overlay on the page */
+       display: none;
+       /* This will be managed by JS */
+       opacity: 0;
+       visibility: hidden;
+       transition: opacity 0.3s, visibility 0.3s;
+   }
+
+
+
+
+   /* When the popup container is active, it slowly fades in */
+   .popup-container.active {
+       display: flex;
+       /* Make it a flex container to center the content */
+       opacity: 1;
+       visibility: visible;
+       transition-delay: 1s;
+       /* Apply the transition right away */
+
+
+
+
+   }
+
+
+
+
+   .popup-box {
+       background: #C1CEB4;
+       /* Use a plain white background for maximum contrast */
+       border-radius: 15px;
+       /* Rounded corners for a softer look */
+       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+       /* Stronger shadow for more depth */
+       padding: 30px;
+       /* More padding for a spacious feel */
+       width: 100%;
+       max-width: 600px;
+       /* A bit wider for more space */
+       text-align: center;
+       position: relative;
+       /* Needed for positioning the close button absolutely */
+   }
+
+
+
+
+   #daily-prompt-container {
+       font-family: 'Poppins', sans-serif;
+       /* Match theme's font */
+       background: #F2F5EC;
+       /* Light grey background for the text container */
+       padding: 20px;
+       margin: 20px 0;
+       /* Add some margin to the top and bottom */
+       border-radius: 10px;
+       /* Soft rounded corners for the prompt container */
+       color: #253333;
+       /* Text color theme */
+   }
+
+
+
+
+   .close-btn {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       position: absolute;
+       top: -10px;
+       /* Adjust as needed */
+       right: -10px;
+       /* Adjust as needed */
+       background-color: #54696E;
+       /* Background color theme */
+       color: #F1F7F3;
+       /* Text color theme */
+       border: none;
+       border-radius: 50%;
+       /* Circle shape */
+       padding: 0;
+       /* Removed the horizontal padding */
+       height: 40px;
+       /* Fixed height for a perfect circle */
+       width: 40px;
+       /* Fixed width for a perfect circle */
+       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+       /* Subtle shadow for the button */
+       cursor: pointer;
+       font-size: 20px;
+       /* Adjust as needed */
+       overflow: hidden;
+       /* To prevent any overflow */
+
+
+
+
+
+
+
+
+   }
+
+
+
+
+   .close-btn:hover {
+       background-color: #b5c3a0;
+       /* A darker shade of red for hover state */
+   }
+
+
+
+
+   #daily-prompt {
+       font-size: 18px;
+       /* Increase font size for better readability */
+       color: #333;
+       /* Dark color for the text */
+       margin-bottom: 20px;
+       /* Space below the prompt text */
+   }
+
+
+
+
+   /* Consider adding an overlay effect to the entire page to focus attention on the popup */
+   .popup-container::before {
+       content: '';
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       background-color: rgba(0, 0, 0, 0.6);
+       /* Dark overlay */
+       z-index: -1;
+       /* Ensure it's behind the popup content */
+   }
+
+
+
+
+   .input-response {
+       width: 100%;
+       /* Full width of the container */
+       padding: 10px;
+       /* Padding inside the textarea */
+       border: 1px solid #ddd;
+       /* Border to match your style */
+       border-radius: 3px;
+       /* Rounded corners */
+       font-family: 'Poppins', sans-serif;
+       /* Font to match your theme */
+       font-size: 1rem;
+       /* Font size */
+       line-height: 1.5;
+       /* Line height for better readability */
+       /* Additional styles... */
+       resize: vertical;
+       /* Allows the user to resize vertically */
+       background-color: #F1F4EB;
+   }
+
+
+
+
+   .answer-btn {
+       background-color: #54696E;
+       /* Color to match the theme */
+       color: #F1F7F3;
+       /* Text color */
+       border: none;
+       border-radius: 4px;
+       /* Rounded corners */
+       padding: 10px 20px;
+       /* Padding for size */
+       margin-top: 15px;
+       /* Spacing from the textarea */
+       cursor: pointer;
+       /* Cursor for interactivity */
+       transition: background-color 0.3s;
+       /* Transition for hover effect */
+       box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+   }
+
+
+
+
+   .answer-btn:hover {
+       background-color: #b5c3a0;
+       /* Slightly darker on hover */
+   }
+
+
+
+
+   /** --------------------------------------------------------------------------------------------------  **/
+
+
+
+
+
+
+
+
+   /* Define light mode variables */
+   :root {
+       --background-image: url('/static/journals/img/photo5.jpg');
+       --text-color: #333;
+   }
+
+
+
+
+   /* Define dark mode variables */
+   [data-theme="dark"] {
+       --background-image: url('/static/journals/img/photo4.jpg');
+       --text-color: #D1D1D1;
+       --icon-color: #D1D1D1;
+   }
+
+
+
+
+   /* Apply the icon color variable with increased specificity */
+   [data-theme="dark"] .sidebar .logo-menu .bx-menu {
+       color: var(--icon-color);
+       /* Ensuring this color takes precedence */
+   }
+
+
+
+
+   [data-theme="dark"] .sidebar,
+   [data-theme="dark"] .sidebar .logo,
+   [data-theme="dark"] .sidebar .logo-menu,
+   [data-theme="dark"] .sidebar .link-name,
+   [data-theme="dark"] .time-bar,
+   [data-theme="dark"] .word-count,
+   [data-theme="dark"] .list .list-item a {
+       color: #D1D1D1;
+       background-color: transparent;
+   }
+
+
+
+
+   /* Define styles that change when dark mode is active */
+   [data-theme="dark"] .horizontal-navbar ul li button,
+   [data-theme="dark"] #submit-button {
+       color: #D1D1D1;
+       /* Lighter text color for dark mode */
+       background: #181818;
+       /* Optional: change background for buttons and sidebar */
+   }
+
+
+
+
+   [data-theme="dark"] .clear-btn {
+       color: #D1D1D1;
+   }
+
+
+
+
+   /* Hover state for the save entry button for both light and dark modes */
+   #submit-button:hover {
+       background-color: #D1D1D1;
+       /* Lighter color on hover */
+       color: #eef5ef;
+       /* Text color on hover */
+       /* Other styles for hover state, if any */
+   }
+
+
+
+
+   /* You may want to ensure dark mode does not override this with a more specific rule */
+   [data-theme="dark"] #submit-button:hover {
+       background-color: #D1D1D1;
+       /* Same as light mode */
+       color: #eef5ef;
+       /* Same as light mode */
+   }
+
+
+
+
+   /* Hover state for the formatting buttons for both light and dark modes */
+   .horizontal-navbar ul li button:hover {
+       background: #D1D1D1;
+       /* Lighter background color on hover */
+       /* Add any other styles for hover state */
+   }
+
+
+
+
+   /* Same for dark mode */
+   [data-theme="dark"] .horizontal-navbar ul li button:hover {
+       background: #D1D1D1;
+       /* Same as light mode */
+       /* Ensure no other dark mode rules are more specific than this */
+   }
+
+
+
+
+   [data-theme="dark"] .list .list-item.active a,
+   [data-theme="dark"] .list .list-item a:hover {
+       background: rgba(255, 255, 255, .2);
+   }
+
+
+
+
+   /** --------------------------------------------------------------------------------------------------  **/
+
+
+
+
+
+
+
+
+   body {
+       background-image: var(--background-image);
+       color: var(--text-color);
+       background-size: cover;
+       background-position: center;
+       transition: background-image 0.5s ease-in-out;
+   }
+
+
+
+
+   /* Specific styles for the dark mode toggle to avoid conflicts */
+   /* Specific styles for the dark mode toggle */
+   .dark-mode-label {
+       position: fixed;
+       left: 0;
+       top: 0;
+       width: 35px;
+       height: 30px;
+       background-color: transparent;
+       border-radius: 50%;
+       cursor: pointer;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+
+
+
+
+   }
+
+
+
+
+   /* Hide the checkbox visually but keep it in the document flow */
+   .dark-mode-checkbox {
+       opacity: 0;
+       position: absolute;
+       z-index: -1;
+       /* Put it behind the icons */
+   }
+
+
+
+
+   /* Style icons */
+   .dark-mode-label ion-icon {
+       font-size: 1.5em;
+       /* Set the size of the icons */
+       color: #4D6267;
+       filter: drop-shadow(0 0 2px rgba(0, 0, 0, .5));
+       position: absolute;
+       /* Absolute positioning to stack icons */
+   }
+
+
+
+
+   /* Initially, only the moon icon is visible */
+   .icon-sun {
+       display: none;
+
+
+
+
+   }
+
+
+
+
+   /* When dark mode is active, show the sun icon and hide the moon icon */
+   .dark-mode-label.active .icon-moon {
+       display: none;
+   }
+
+
+
+
+   .dark-mode-label.active .icon-sun {
+       display: block;
+       color: #FFA500;
+       /* Adjust the color of the sun icon to match your theme */
+       font-size: 1.5em;
+       filter: drop-shadow(0 0 2px rgba(0, 0, 0, .5));
+   }
+
+
+
+
+   /* Hover effect for icons */
+   .dark-mode-label ion-icon {
+       transition: transform 0.3s ease-in-out;
+   }
+
+
+
+
+   .dark-mode-label ion-icon:hover {
+       transform: scale(1.1);
+       /* Slightly enlarge the icon on hover */
+   }
+
+
+   /** --------------------------------------------------------------------------------------------------  **/
+
+
+
+
+   /** --------------------------------------------------------------------------------------------------  **/
+
+   /* Dark mode styles for the calendar */
+   [data-theme="dark"] .calendar {
+       background-color: #454545;
+       /* Darker background for the calendar */
+       color: #D1D1D1;
+       /* Lighter text color for readability */
+   }
+
+
+
+
+   [data-theme="dark"] #monthYear {
+       color: #FFFFFF;
+       /* This sets the text color to white */
+   }
+
+
+
+
+   /* Dark mode styles for the previous and next month buttons */
+   [data-theme="dark"] #prevMonth,
+   [data-theme="dark"] #nextMonth {
+       background-color: #000000;
+       /* This sets the icon color to black */
+   }
+
+
+
+
+   [data-theme="dark"] #prevMonth:hover,
+   [data-theme="dark"] #nextMonth:hover {
+       background-color: #656565;
+   }
+
+
+
+
+
+
+
+
+   [data-theme="dark"] .calendar .header1,
+   [data-theme="dark"] .calendar .days,
+   [data-theme="dark"] .calendar .date {
+       background-color: #454545;
+       /* Slightly lighter than the calendar background for contrast */
+       color: #E1E1E1;
+       /* Light color for the text, ensuring readability */
+   }
+
+
+
+
+   /* Styles for the navigation buttons in dark mode */
+   [data-theme="dark"] .calendar .navigation button {
+       color: #D1D1D1;
+       /* Light color for the buttons */
+   }
+
+
+
+
+   /* Styles for the days of the week in dark mode */
+   [data-theme="dark"] .calendar .days .day {
+       color: #E1E1E1;
+       /* Light color for the days' labels */
+   }
+
+
+
+
+   /* Styles for the individual dates in dark mode */
+   [data-theme="dark"] .calendar .dates .date {
+       color: #E1E1E1;
+       /* Light color for the date numbers */
+   }
+
+
+
+
+   /* Style for the current day in dark mode */
+   [data-theme="dark"] .calendar .dates .date.today {
+       background-color: #565656;
+       /* A distinct background color for today's date */
+       color: #FFFFFF;
+       /* White color for better contrast and visibility */
+   }
+
+
+
+
+   /* Hover style for dates in dark mode */
+   [data-theme="dark"] .calendar .dates .date:hover {
+       background-color: #656565;
+       /* A lighter background color on hover */
+       color: #FFFFFF;
+       /* Maintain white text on hover for readability */
+   }
+
+
+
+
+   /** --------------------------------------------------------------------------------------------------  **/
+
+
+
+
+   /* Dark mode styles for the daily prompt container */
+   [data-theme="dark"] .popup-box,
+   [data-theme="dark"] #daily-prompt-container {
+       background-color: #D1D1D1;
+       /* Dark background for the container */
+       color: #333;
+       /* Lighter text for better contrast */
+       /* Add any other styles for the prompt container in dark mode */
+   }
+
+
+
+
+   [data-theme="dark"] .popup-box {
+       background-color: #333;
+   }
+
+
+
+
+   /* Dark mode styles for the input area within the daily prompt */
+   [data-theme="dark"] .input-response {
+
+       /* Dark background for the input */
+       color: #444;
+       /* White text for better contrast */
+       border-color: #555;
+       /* Darker border to match the input background */
+       /* Add any other styles for the input in dark mode */
+   }
+
+
+
+
+   /* Dark mode styles for the save answer button within the daily prompt */
+   [data-theme="dark"] .answer-btn {
+       background-color: #555;
+       /* Darker background for the button */
+       color: #ddd;
+       /* Lighter text for better contrast */
+       /* Add any other button styles for dark mode */
+   }
+
+
+
+
+   /* Dark mode styles for the close button within the daily prompt */
+   [data-theme="dark"] .close-btn {
+       background-color: #555;
+       /* Darker background for the button */
+       color: #ddd;
+       /* Lighter text for better contrast */
+       /* Add any other close button styles for dark mode */
+   }
+
+
+   [data-theme="dark"] .close-btn:hover,
+   [data-theme="dark"] .answer-btn:hover {
+       background-color: #656565;
+   }
+
+
+
+
+   /** --------------------------------------------------------------------------------------------------  **/
+
+
+
+
+   /* Dark mode styles for entries */
+   [data-theme="dark"] {
+       /* Existing dark mode variable definitions */
+       --entry-bg-color: #D1D1D1;
+       /* Dark background for the entry */
+       --entry-text-color: #181818;
+       /* Light text color for readability */
+       /* Add other dark mode variable definitions as needed */
+   }
+
+
+
+
+
+
+
+
+   /* Target the saved entry background and text color specifically for dark mode */
+   [data-theme="dark"] .entries,
+   [data-theme="dark"] .entry {
+       background-color: var(--entry-bg-color);
+       color: var(--entry-text-color);
+   }
+
+   [data-theme="dark"] #streak-popup {
+    background-color: #656565;
+    color:#D1D1D1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+   }
+
+   /** --------------------------------------------------------------------------------------------------  **/
+
+#streak-popup {
+    position: fixed; /* Changed to fixed for consistent positioning across screen sizes */
+    top: 5%; /* End position */
+    right: 5%; /* End position */
+    transform: translate(-50%, -50%); 
+    background-color: #F2F5EC;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: none; /* Initially hidden */
+    animation: slideInFromSidebar 0.5s ease-out forwards; /* Animation applied */
+}
+
+/* Styles when not hidden */
+#streak-popup:not(.hidden) {
+    display: block; /* Make visible when class 'hidden' is not present */
+}
+
+.fire-icon {
+    color: orange;
+    margin-right: 5px;
+}
+
+/* Define keyframes for moving the popup */
+@keyframes slideInFromSidebar {
+    0% {
+        top: 20%; /* Starting from the bottom (adjust based on sidebar's position) */
+        right: 10%; /* Start close to the sidebar's width */
+        opacity: 0; /* Start hidden */
+    }
+    100% {
+        top: 5%; /* End position */
+        right: 6%; /* End position */
+        opacity: 1; /* Fully visible */
+    }
+}
+
+  /** --------------------------------------------------------------------------------------------------  **/
+
+
+/* Search styles */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: none; /* This hides the overlay initially */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+
+
+
+.search-box {
+    position: relative;
+    background: #f3f3f3; /* Light grey background that matches your theme */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Soft shadow for 3D effect */
+    display: flex;
+    gap: 10px;
+    width: 50%; /* Adjust based on your preference */
+}
+
+
+.search-box input[type="text"] {
+    flex-grow: 1; /* Allows input to expand more */
+    padding: 8px 10px;
+    font-size: 16px; /* Larger font size for better readability */
+    border: 2px solid #ccc; /* Subtle border */
+    border-radius: 4px; /* Rounded borders */
+}
+
+
+.search-box button {
+    background-color: #b0c0a3; /* Green background for buttons */
+    color: #333;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+
+.search-box button:hover {
+    background-color: #687c7d; /* Slightly darker green on hover */
+}
+
+
+/* Updated styles for the close button */
+#close-search {
+    position: absolute; /* Position relative to .search-box */
+    top: -10px; /* Adjust as needed */
+    right: -10px; /* Adjust to keep the button outside the search box */
+    background-color: #54696E;
+    color: #F1F7F3;
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    height: 35px;
+    width: 35px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#close-search:hover {
+    background-color: #7d9491; /* Lighter color on hover for visibility */
+}
+
+
+#clear-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#clear-button2 i {
+    font-size: 20px; /* Size of the 'x' icon */
+}
+
+
+
+
+@media (max-width: 600px) {
+    #close-search {
+        top: -5px;
+        right: -5px;
+    }
+}
+
+
+/* Dark mode styles for the search overlay */
+[data-theme="dark"] .search-overlay {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+
+/* Dark mode styles for the search box and its components */
+[data-theme="dark"] .search-box {
+    background-color: #333;
+    color: #fff;
+}
+
+
+[data-theme="dark"] .search-box input[type="text"] {
+    background-color: #555;
+    color: #fff;
+    border-color: #777;
+}
+
+
+[data-theme="dark"] .search-box input[type="text"]::placeholder {
+    color: #ccc;
+}
+
+
+[data-theme="dark"] .search-box button {
+    background-color: #555;
+    color: #ddd;
+}
+
+
+[data-theme="dark"] .search-box button:hover {
+    background-color: #686868;
+    color: #fff;
+}
+
+
+/* Ensure consistent styling for specific buttons if needed */
+[data-theme="dark"] #close-search,
+[data-theme="dark"] #clear-button2 {
+    background-color: #444;
+    color: #ccc;
+}
+
+
+[data-theme="dark"] #close-search:hover,
+[data-theme="dark"] #clear-button2:hover {
+    background-color: #686868;
+    color: #fff;
+}

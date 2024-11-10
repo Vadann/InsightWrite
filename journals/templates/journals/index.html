@@ -1,0 +1,277 @@
+<!-- Dashboard WEBPAGE - This is the main page of the application -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="dashboard" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+
+    <!-- Load static files -->
+    {% load static %}
+
+    <!-- Link CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'journals/dashboard_styles.css' %}"
+    />
+
+    <!-- font -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- Link Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Link Bootstrap JavaScript (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+
+  <!-- Content here -->
+
+  <body class="container">
+    {% load socialaccount %}
+    {% if user.is_authenticated %}
+
+    <div>
+      <header>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="ionicon header-icon"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M439.91 112h-23.82a.09.09 0 00-.09.09V416a32 32 0 0032 32 32 32 0 0032-32V152.09A40.09 40.09 0 00439.91 112z"
+          />
+          <path
+            d="M384 416V72a40 40 0 00-40-40H72a40 40 0 00-40 40v352a56 56 0 0056 56h342.85a1.14 1.14 0 001.15-1.15 1.14 1.14 0 00-.85-1.1A64.11 64.11 0 01384 416zM96 128a16 16 0 0116-16h64a16 16 0 0116 16v64a16 16 0 01-16 16h-64a16 16 0 01-16-16zm208 272H112.45c-8.61 0-16-6.62-16.43-15.23A16 16 0 01112 368h191.55c8.61 0 16 6.62 16.43 15.23A16 16 0 01304 400zm0-64H112.45c-8.61 0-16-6.62-16.43-15.23A16 16 0 01112 304h191.55c8.61 0 16 6.62 16.43 15.23A16 16 0 01304 336zm0-64H112.45c-8.61 0-16-6.62-16.43-15.23A16 16 0 01112 240h191.55c8.61 0 16 6.62 16.43 15.23A16 16 0 01304 272zm0-64h-63.55c-8.61 0-16-6.62-16.43-15.23A16 16 0 01240 176h63.55c8.61 0 16 6.62 16.43 15.23A16 16 0 01304 208zm0-64h-63.55c-8.61 0-16-6.62-16.43-15.23A16 16 0 01240 112h63.55c8.61 0 16 6.62 16.43 15.23A16 16 0 01304 144z"
+          />
+        </svg>
+        <strong class="header-text">Insight Write</strong>
+
+        <!-- Settings dropdown button -->
+        <a
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <ion-icon
+            name="person-circle"
+            class="drop-down-icon container-fluid"
+          ></ion-icon>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdown"
+        >
+          <li style="display: flex; align-items: center">
+            <a class="dropdown-item" href="#"
+              ><ion-icon name="person" style="margin-right: 20px"></ion-icon
+              >User Profile</a
+            >
+          </li>
+          <li style="display: flex; align-items: center">
+            <a class="dropdown-item" href="#"
+              ><ion-icon name="settings" style="margin-right: 20px"></ion-icon
+              >Settings</a
+            >
+          </li>
+          <li style="display: flex; align-items: center">
+            <a class="dropdown-item" href="#"
+              ><ion-icon
+                name="notifications"
+                style="margin-right: 20px"
+              ></ion-icon
+              >Notifications</a
+            >
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="{% url 'account_logout' %}?next=/"
+              ><ion-icon name="log-out" style="margin-right: 20px"></ion-icon
+              >Logout</a
+            >
+          </li>
+        </ul>
+      </header>
+    </div>
+
+    <!-- Quotes Section: Quotes from authors and writers about writing-->
+    <div class="writing-quotes">
+      <div id="typewriterText" class="writing-quotes">
+        "Fill your paper with the breathings of your heart." - William
+        Wordsworth, "Write with the door closed, rewrite with the door open." -
+        Stephen King, "No tears in the writer, no tears in the reader. No
+        surprise in the writer, no surprise in the reader." - Robert Frost,
+        "Write what should not be forgotten." - Isabel Allende, "The role of a
+        writer is not to say what we all can say, but what we are unable to
+        say." - Anaïs Nin, "There is no greater agony than bearing an untold
+        story inside you." - Maya Angelou, "I write entirely to find out what
+        I'm thinking, what I'm looking at, what I see and what it means. What I
+        want and what I fear." - Joan Didion, "Write what disturbs you, what you
+        fear, what you have not been willing to speak about. Be willing to be
+        split open." - Natalie Goldberg, "We write to taste life twice, in the
+        moment and in retrospect." - Anaïs Nin, "Write hard and clear about what
+        hurts." - Ernest Hemingway.
+      </div>
+    </div>
+
+    <!-- banner section -->
+    <section id="hero" class="d-flex aligh-items-center">
+      <div class="container text-center">
+        <h1>Welcome to Your Dashboard, {{ request.user.username|capfirst}}</h1>
+        <h2>
+          A custom journaling website to start your journey of self-discovery
+        </h2>
+      </div>
+    </section>
+
+    <!-- Card section: Rerouting to other pages -->
+    <div class="hero container my-5 card-grid">
+      <div class="row">
+        <!-- Card 1 -->
+        <div class="col-lg-6 col-md-6 mb-4">
+          <a href="/journals/journal-entries/">
+            <div class="card">
+              <!-- Card image -->
+              <div class="card-image">
+                <img
+                  src="../../static/journals/img/journaling_guy.jpg"
+                  alt="Card image"
+                />
+              </div>
+              <!-- Card body -->
+              <div class="card-bottom">
+                <div class="card-title">Journal Entries</div>
+                <div class="card-description">
+                  Access your personal journals and create new ones
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <!-- Card 2 -->
+        <div class="col-lg-6 col-md-6 mb-4">
+          <a href="{% url 'account_logout' %}?next=/calendar">
+            <div class="card">
+              <!-- Card image -->
+              <div class="card-image">
+                <img
+                  src="../../static/journals/img/calendar.jpg"
+                  alt="Card image"
+                />
+              </div>
+              <!-- Card body -->
+              <div class="card-bottom">
+                <div class="card-title">Calendar</div>
+                <div class="card-description">Stay up to date</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- This is the closing tag for the row -->
+
+      <div class="row">
+        <!-- Card 3 -->
+        <div class="col-lg-6 col-md-6 mb-4">
+          <a href="{% url 'meditations:index' %}">
+            <div class="card">
+              <!-- Card image -->
+              <div class="card-image">
+                <img
+                  src="../../static/journals/img/meditating_person.jpg"
+                  alt="Card image"
+                />
+              </div>
+              <!-- Card body -->
+              <div class="card-bottom">
+                <div class="card-title">Mindful Resources</div>
+                <div class="card-description">
+                  See what our team recommends for helpful content
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- This is the closing tag for the row -->
+    </div>
+
+    <section>
+      <footer></footer>
+    </section>
+
+    <script>
+      var textElement = document.getElementById("typewriterText");
+      var quotes = textElement.innerHTML.match(/"[^"]+" - [^,]+/g);
+      var quoteIndex = 0;
+
+      function typeQuote() {
+        var quote = quotes[quoteIndex].trim();
+        var text = "";
+        var textIndex = 0;
+
+        textElement.innerHTML = "";
+        textElement.classList.remove("fill-text-typing");
+
+        var typingInterval = setInterval(function () {
+          text += quote.charAt(textIndex);
+          textElement.innerHTML = text;
+          textIndex++;
+
+          if (textIndex > quote.length) {
+            clearInterval(typingInterval);
+
+            setTimeout(function () {
+              textElement.classList.add("fill-text-typing");
+
+              setTimeout(function () {
+                quoteIndex = (quoteIndex + 1) % quotes.length;
+                typeQuote();
+              }, 2000);
+            }, 1000);
+          }
+        }, 100);
+      }
+
+      typeQuote();
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Inoic Icons -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    {% endif %}
+  </body>
+</html>
