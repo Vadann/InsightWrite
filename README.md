@@ -13,7 +13,6 @@ Our website is designed to offer a unique journaling experience, serving individ
 
 - [**Insight Write Website Video Showcase**:](https://drive.google.com/file/d/1c9Ukrlcn4dsno9vPqzJj2R-oRgrBjnLr/view?pli=1)
 
-- **Insight Write Google Slides Presentation**
 
 ---
 
