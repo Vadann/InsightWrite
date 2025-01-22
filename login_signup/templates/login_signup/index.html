@@ -38,17 +38,8 @@
   </nav>
 </header>
 
-<div class="wrapper">
+<div class="wrapper {% if show_signup %}active{% endif %} {% if messages %}has-messages{% endif %} {% if messages or show_login or show_signup %}active-popup{% endif %}">
     <span class="icon-close"><ion-icon name="close"></ion-icon></span>
-
-    <!-- Add this near the top of the template to show any error messages -->
-    {% if messages %}
-    <div class="messages">
-        {% for message in messages %}
-        <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
-        {% endfor %}
-    </div>
-    {% endif %}
 
     <div class="form-box login">
         <h2>Login</h2>
@@ -103,12 +94,32 @@
                 <span class="icon"><ion-icon name="mail"></ion-icon></span>
                 <input type="email" name="email" required>
                 <label>Email</label>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if 'email' in message.message|lower %}
+                        <div class="error-message">
+                            <ion-icon name="alert-circle"></ion-icon>
+                            {{ message }}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             </div>
 
             <div class="input-box">
                 <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
                 <input type="password" name="password1" required>
                 <label>Password</label>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if 'password' in message.message|lower %}
+                        <div class="error-message">
+                            <ion-icon name="alert-circle"></ion-icon>
+                            {{ message }}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             </div>
 
             <div class="input-box">

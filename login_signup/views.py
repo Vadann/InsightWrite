@@ -48,7 +48,10 @@ class LoginIndexView(View):
                 except User.DoesNotExist:
                     pass
                 messages.error(request, "Invalid email or password.")
-            return render(request, self.template_name, {'login_form': form})
+            return render(request, self.template_name, {
+                'login_form': form,
+                'show_login': True  # Add this to keep login form visible
+            })
             
         elif 'signup' in request.POST:
             form = SignUpForm(request.POST)
@@ -58,14 +61,17 @@ class LoginIndexView(View):
                     login(request, user, backend='django.contrib.auth.backends.ModelBackend')
                     return redirect('journals:index')
                 except Exception as e:
-                    print(f"Error creating user: {e}")  # For debugging
+                    print(f"Error creating user: {e}")
                     messages.error(request, "Error creating account. Please try again.")
             else:
                 if 'email' in form.errors:
                     messages.error(request, "Email already exists")
                 if 'password2' in form.errors:
                     messages.error(request, "Passwords don't match")
-            return render(request, self.template_name, {'signup_form': form})
+            return render(request, self.template_name, {
+                'signup_form': form,
+                'show_signup': True
+            })
 
 
 class LoginDetailView(generic.DetailView):

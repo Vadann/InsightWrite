@@ -24,3 +24,10 @@ btnPopup.addEventListener('click', ()=> {
 iconClose.addEventListener('click', ()=> {
     wrapper.classList.remove('active-popup')
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we need to show signup form (after failed signup attempt)
+    if (document.querySelector('.wrapper').classList.contains('active')) {
+        wrapper.classList.add('active-popup');
+    }
+});

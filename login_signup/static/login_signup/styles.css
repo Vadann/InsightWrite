@@ -100,8 +100,8 @@ margin-right: 5px; /* Adjust spacing between icon and text */
 /** login container field ***/
 .wrapper{
     position: relative;
-    width: 400px;
-    height: 440px;
+    width: 420px;
+    height: 480px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .5);
     border-radius: 20px;
@@ -110,25 +110,29 @@ margin-right: 5px; /* Adjust spacing between icon and text */
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /** hide the two fields when one of them moved ***/
-    transform: scale(0); /** making the middle field disappear (would link with the close button) ***/
+    overflow: visible;
+    transform: scale(0);
     transition: transform .5s ease, height .2s ease;
-
-    
 }
 
 .wrapper.active-popup{
     transform: scale(1);
+    overflow: visible; /* Show messages when popup is active */
 }
 
 .wrapper.active {
-    height: 520px;
+    height: 580px;  /* Base height for signup form */
+    overflow: hidden;
 }
 
+/* Add extra height when there are messages */
+.wrapper.active.has-messages {
+    height: 620px;  /* Increased height to accommodate error messages */
+}
 
 .wrapper .form-box{
     width: 100%;
-    padding: 40px;
+    padding: 40px 45px;
 }
 
 /*login display*/
@@ -413,32 +417,51 @@ footer {
 }
 
 .messages {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    width: 80%;
+    position: relative;
+    width: 100%;
+    margin: -10px 0 10px 0;  /* Negative top margin to bring it closer to heading */
     text-align: center;
 }
 
 .messages div {
-    padding: 10px;
+    display: inline-block;
+    padding: 4px 12px;
     margin: 5px 0;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    font-size: 0.8em;
+    background-color: rgba(255, 218, 218, 0.95);
+    border: 1px solid #ff9999;
+    color: #162938;
+}
+
+.messages div ion-icon {
+    vertical-align: middle;
+    margin-right: 5px;
+    font-size: 1em;
 }
 
 .messages .error {
-    background-color: rgba(248, 215, 218, 0.9);
-    color: #721c24;
-    border-color: #f5c6cb;
+    background-color: rgba(255, 218, 218, 0.9);
+    border-color: #ff9999;
 }
 
 .messages .success {
-    background-color: rgba(212, 237, 218, 0.9);
-    color: #155724;
-    border-color: #c3e6cb;
+    background-color: rgba(218, 255, 218, 0.9);
+    border-color: #99ff99;
+}
+
+/* Add this new error message styling */
+.input-box .error-message {
+    position: absolute;
+    bottom: -20px;
+    left: 5px;
+    font-size: 0.7em;
+    color: #ff4444;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.input-box .error-message ion-icon {
+    font-size: 0.9em;
 }
