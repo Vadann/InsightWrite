@@ -6,3 +6,4 @@ pytest-django==4.7.0  # for testing
 pytest==7.4.4  # for testing
 wait-for-it==2.2.2
 django-allauth==0.61.1  # for authentication
+python-dotenv==1.0.0  # for environment variables
