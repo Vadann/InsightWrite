@@ -16,6 +16,16 @@ class LoginForm(AuthenticationForm):
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True)
     username = forms.CharField(max_length=150, required=True)
+    password1 = forms.CharField(
+        label='Password',
+        widget=forms.PasswordInput,
+        required=True,
+    )
+    password2 = forms.CharField(
+        label='Confirm Password',
+        widget=forms.PasswordInput,
+        required=True,
+    )
     
     class Meta:
         model = User
@@ -32,10 +42,22 @@ class SignUpForm(UserCreationForm):
         username = self.cleaned_data.get('username')
         return username
 
+    def _post_clean(self):
+        super()._post_clean()
+        # Remove password validation errors
+        if 'password2' in self._errors:
+            # Only keep the "passwords don't match" error if it exists
+            dont_match_error = [e for e in self._errors['password2'] if 'password' in e and 'match' in e]
+            if dont_match_error:
+                self._errors['password2'] = dont_match_error
+            else:
+                del self._errors['password2']
+
     def save(self, commit=True):
         user = super(SignUpForm, self).save(commit=False)
         user.email = self.cleaned_data["email"]
-        user.username = f"{self.cleaned_data['username']}_{User.objects.count()}"  # Make username unique by adding counter
+        # Remove the _1 suffix - just use the username as provided
+        user.username = self.cleaned_data["username"]
         if commit:
             user.save()
         return user
