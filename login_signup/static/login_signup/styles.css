@@ -411,3 +411,34 @@ footer {
     content: '\f099';
     color: #1da1f2;
 }
+
+.messages {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 80%;
+    text-align: center;
+}
+
+.messages div {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.messages .error {
+    background-color: rgba(248, 215, 218, 0.9);
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.messages .success {
+    background-color: rgba(212, 237, 218, 0.9);
+    color: #155724;
+    border-color: #c3e6cb;
+}
