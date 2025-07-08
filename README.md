@@ -1,8 +1,6 @@
 
 # Insight Write Journaling Application
 
-## Software Engineering Final Project
-
 Welcome! The team and I collaborated to create **Insight Write** 📒, a Django web application built with Python.
 
 Our website is designed to offer a unique journaling experience, serving individuals interested in personal growth and self-expression. **Insight Write** provides a private and supportive space for users to reflect and improve their mental health.
